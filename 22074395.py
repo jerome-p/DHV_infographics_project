@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[26]:
+# In[127]:
 
 
 """
@@ -19,6 +19,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import matplotlib
 
 def load_data(dataset, country_list):
     """
@@ -60,18 +61,18 @@ def create_line_plot(data, countries, indicator, xlabel, ylabel, title):
         subset_df = temp_df[temp_df['Indicator Name'] == indicator]
         # Transposing the df again to makes years the index.
         subset_df = subset_df.T
-
+        
         # Plotting using the subset df.
         # Plotting using for loop to include line plots of every country
         # in the same figure.        
-        plt.plot(subset_df[1:], label=country)
+        plt.plot(subset_df[1::2], label=country)
 
         # Labelling
         plt.xticks(rotation=90)
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
         plt.title(title)
-        plt.legend()
+        plt.legend(facecolor='xkcd:light grey')
 
     return 
 
@@ -133,7 +134,7 @@ def create_bar_graph(data, year, indicator, title):
     # labelling
     plt.xlabel("Country")
     plt.ylabel("%")
-    plt.xticks(rotation=20)
+    plt.xticks(rotation=45)
     plt.title(title)
 
     return
@@ -147,26 +148,27 @@ data, dataT = load_data(
     countries)
 
 # Setting figure size
-fig = plt.figure(figsize=[25,20])
+fig = plt.figure(figsize=[30,20])
 #Setting font size for labels and titles
-plt.rcParams.update({'font.size': 13})
+plt.rcParams.update({'font.size': 14})
 
 #Creating the header/title for infographic
-plt.subplot(711)
-props = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
+plt.subplot(7,4,(2,3))
 
 textstr = """
-                                                        GDP of countries and other factors that affect it                                
+                                            GDP of countries and other factors that affect it                                
                                                                                                                                                                           
-                                                                                                                                                                          Name: Jerome Paulraj
-                                                                                                                                                                          Student ID: 22074395
+                                                                                                                                                            Name: Jerome Paulraj
+                                                                                                                                                            Student ID: 22074395
  """
-t = "This infographic gives us information on the GDP of 6 countries, China, India, Japan, Germany, United States and United Kingdom."
+t = "This infographic gives us information for 6 countries, China, India, Japan, Germany, United States and United Kingdom."
 plt.axis('off')
-plt.text(0.05, 0.95, textstr, bbox=props,fontsize=20, verticalalignment='top')
-plt.text(0.05, 0.40, t, bbox=props,fontsize=20, verticalalignment='top')
+plt.text(0.05, 0.95, textstr, fontsize=17, verticalalignment='top',  weight='bold')
+# props = dict(boxstyle='round', facecolor='black', alpha=0.5)
 
-plt.subplot(723)
+plt.text(0.05, 0.25, t, fontsize=17, verticalalignment='top')
+
+ax = plt.subplot(7,4,(5,6))
 
 # Generating a line plot for the selected indicator
 create_line_plot(dataT, countries,
@@ -175,8 +177,9 @@ create_line_plot(dataT, countries,
                    "US$ (Trillions)",
                    "GDP of countries in Trillion $"
                   )
+ax.patch.set_facecolor('xkcd:light grey')
 
-plt.subplot(724)
+ax1 = plt.subplot(7,4,(7,8))
 
 # Generating a line plot for the selected indicator
 create_line_plot(dataT, countries,
@@ -186,8 +189,9 @@ create_line_plot(dataT, countries,
                    "Personal Remittances received in Billions $",
                   )
 
+ax1.patch.set_facecolor('xkcd:light grey')
 
-plt.subplot(725)
+plt.subplot(7,4,13)
 # Creating a pie chart of an indicator for a selected country and year.
 create_pie_chart(
     dataT,
@@ -197,7 +201,8 @@ create_pie_chart(
     'Exports of goods and services (% of GDP)'
 )
 
-plt.subplot(726)
+
+plt.subplot(7,4,14)
 # Creating a pie chart of an indicator for a selected country and year.
 create_pie_chart(
     dataT,
@@ -207,7 +212,8 @@ create_pie_chart(
     'Imports of goods and services (% of GDP)'
 )
 
-plt.subplot(7,2,7)
+
+ax2 = plt.subplot(7,4,15)
 # Creating a bar chart of an indicator for a selected country and year.
 create_bar_graph(
     data,
@@ -215,9 +221,11 @@ create_bar_graph(
     'Inflation, consumer prices (annual %)',
     title="Inflation, consumer prices (annual %) 1990"
 )
+ax2.patch.set_facecolor('xkcd:light grey')
 
 
-plt.subplot(728)
+
+ax3 = plt.subplot(7,4,16)
 # Creating a bar chart of an indicator for a selected country and year.
 create_bar_graph(
     data,
@@ -225,25 +233,37 @@ create_bar_graph(
     'Inflation, consumer prices (annual %)',
     title="Inflation, consumer prices (annual %) 2020"
 )
+ax3.patch.set_facecolor('xkcd:light grey')
 
 
-
-plt.subplot(729)
+plt.subplot(7,4,21)
 props = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
 
 textstr = """
-- In the first graph we can see the GDPs of 6 countries, namely India, China, Japan, United States, United Kingdom and Japan.
-  United States and China seem to be the countries with the highest GDP, USA can be seen increasing from the 1970s quite 
-  linearly from \$0.5 Trillion to aproximately \$2.5 Trillion around 2022.
+- In the first graph we can see the GDPs of 6 countries, namely India, China, Japan, United States, 
+  United Kingdom and Japan. United States and China seem to be the countries with the highest GDP,
+  USA can be seen increasing from the 1970s quite linearly from \$0.5 Trillion to aproximately
+  \$2.5 Trillion around 2022.
 
-- China on the other hand can be seen to have a more drastic spike in the 2000s. From below \$0.5 Trillion to around 
-  \$1.75 Trillion. This could be due the dot-com explosion and firms like, Ali Baba in the IT sector. Along with other
-  manufacturing industries.
+- China on the other hand can be seen to have a more drastic spike in the 2000s. From below
+  \$0.5 Trillion to around \$1.75 Trillion. This could be due the dot-com explosion and
+  firms like, Ali Baba in the IT sector. Along with other manufacturing industries.
   
-- Another interesting factor that could contribute to the GDP of the country is the amount of personal remittance recevied.
-  This is the amount of foreign money sent by non residents. India seems to be the highest in this aspect with more than
-  a Billion USD recevived in 2022 alone. This is could be due to the phenomenon "brain drain".  
+- Another interesting factor that could contribute to the GDP of the country is the amount
+  of personal remittance recevied. This is the amount of foreign money sent by non residents.
+  India seems to be the highest in this aspect with more than a Billion USD recevived in 
+  2022 alone. This is could be due to the phenomenon "brain drain".  
+ """
 
+
+plt.text(0.05, 0.95, textstr, fontsize=15,verticalalignment='top')
+plt.axis('off')
+
+
+plt.subplot(7,4,23)
+props = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
+
+textstr = """
 - In the year 2021, China and India have similar levels of exports of goods and services. i.e 14% and 15% of the GDP.
   Meanwhile United states and United Kingdom have 7% and 20% of the GDP. Almost all countries seem to maintain fairly
   equal levels of import and export. Which could explain the why the selected countries have relatively
@@ -261,14 +281,15 @@ textstr = """
  """
 
 
-plt.text(0.05, 0.95, textstr, fontsize=20,bbox=props,verticalalignment='top')
-plt.subplots_adjust(top=2.5)
+plt.text(0.05, 0.95, textstr, fontsize=15,verticalalignment='top')
+plt.subplots_adjust(top=1)
 
 plt.axis('off')
 
-fig.patch.set_facecolor('xkcd:pastel blue')
+fig.patch.set_facecolor('xkcd:light grey')
 
-plt.savefig('22074395.png', bbox_inches='tight', dpi=300)
+#plt.savefig('22074395.png', bbox_inches='tight', dpi=300)
+plt.show()
 
 
 # In[ ]:
