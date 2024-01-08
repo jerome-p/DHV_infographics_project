@@ -1,8 +1,19 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[19]:
+# In[26]:
 
+
+"""
+Link to jupyter file - 
+https://github.com/jerome-p/DHV_infographics_project/blob/main/22074395.ipynb
+
+Link to repository:
+https://github.com/jerome-p/DHV_infographics_project/tree/main
+
+Dataset Used:
+ https://data.worldbank.org/topic/economy-and-growth?view=chart
+"""
 
 import pandas as pd
 import numpy as np
@@ -247,8 +258,6 @@ textstr = """
 - The western counterparts all seem to have been successful in reducing their inflation. But Japan is the only country with 
   the least amount of inflation, which according to the Wall Street Journal, have been the result of ultra-tight, 
   not “ultra-loose,” monetary policy. 
-
-- Link to Dataset: https://data.worldbank.org/topic/economy-and-growth?view=chart
  """
 
 
