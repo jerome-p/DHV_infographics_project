@@ -268,8 +268,7 @@ plt.axis('off')
 
 fig.patch.set_facecolor('xkcd:pastel blue')
 
-#plt.savefig('22074395.png', bbox_inches='tight', dpi=300)
-plt.show()
+plt.savefig('22074395.png', bbox_inches='tight', dpi=300)
 
 
 # In[ ]:
