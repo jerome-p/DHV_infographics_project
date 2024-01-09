@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[127]:
+# In[1]:
 
 
 """
@@ -18,8 +18,6 @@ Dataset Used:
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
-import matplotlib
 
 def load_data(dataset, country_list):
     """
@@ -75,7 +73,6 @@ def create_line_plot(data, countries, indicator, xlabel, ylabel, title):
         plt.legend(facecolor='xkcd:light grey')
 
     return 
-
 
 def create_pie_chart(data, year, countries, indicator, title):
     """
@@ -212,7 +209,6 @@ create_pie_chart(
     'Imports of goods and services (% of GDP)'
 )
 
-
 ax2 = plt.subplot(7,4,15)
 # Creating a bar chart of an indicator for a selected country and year.
 create_bar_graph(
@@ -223,8 +219,6 @@ create_bar_graph(
 )
 ax2.patch.set_facecolor('xkcd:light grey')
 
-
-
 ax3 = plt.subplot(7,4,16)
 # Creating a bar chart of an indicator for a selected country and year.
 create_bar_graph(
@@ -234,7 +228,6 @@ create_bar_graph(
     title="Inflation, consumer prices (annual %) 2020"
 )
 ax3.patch.set_facecolor('xkcd:light grey')
-
 
 plt.subplot(7,4,21)
 props = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
@@ -254,8 +247,6 @@ textstr = """
   India seems to be the highest in this aspect with more than a Billion USD recevived in 
   2022 alone. This is could be due to the phenomenon "brain drain".  
  """
-
-
 plt.text(0.05, 0.95, textstr, fontsize=15,verticalalignment='top')
 plt.axis('off')
 
@@ -288,12 +279,4 @@ plt.axis('off')
 
 fig.patch.set_facecolor('xkcd:light grey')
 
-#plt.savefig('22074395.png', bbox_inches='tight', dpi=300)
-plt.show()
-
-
-# In[ ]:
-
-
-
-
+plt.savefig('22074395.png', bbox_inches='tight', dpi=300)
